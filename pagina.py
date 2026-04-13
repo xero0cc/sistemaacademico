@@ -19,7 +19,8 @@ def get_connection():
         port="5432",
         database="postgres",
         user="postgres",
-        password="Aaronyalejandra12"   # ←←← CAMBIA ESTO por tu contraseña real de Supabase
+        password="Aaronyalejandra12",          # ← tu contraseña
+        sslmode="require"                      # ← ESTO ES LO QUE FALTABA
     )
 
 conn = get_connection()
