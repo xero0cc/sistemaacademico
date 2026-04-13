@@ -9,7 +9,7 @@ from datetime import date
 def get_connection():
     return psycopg2.connect(
         host="db.ypoqacbyxmyycwrwfekm.supabase.co",
-        port="5432",
+        port="6543",                    # ← Cambiado a 6543 (Pooler)
         database="postgres",
         user="postgres",
         password="Aaronyalejandra12",   # ← tu contraseña
