@@ -875,7 +875,7 @@ elif pagina == "Ver Calificaciones y Cálculos":
 
     # Filtrar grupos según rol
     if st.session_state.rol_actual == "Maestro" and 'maestro_id' in st.session_state:
-        st.info(f"🔹 Modo Maestro: Solo puedes ver calificaciones de tus propios grupos")
+        st.info(f"Solo puedes ver calificaciones de tus propios grupos")
         cursor.execute("""
             SELECT id_grupo, nombre_grupo 
             FROM grupo 
@@ -1020,7 +1020,7 @@ elif pagina == "Ver Calificaciones y Cálculos":
 
             # ===================== MODIFICACIÓN MANUAL DE CALIFICACIÓN FINAL (Docente) =====================
             if st.session_state.rol_actual in ["Admin", "Maestro"]:
-                st.subheader("✏️ Modificar Calificación Final Manualmente")
+                st.subheader("Modificar Calificación Final Manualmente")
                 with st.form("modificar_calif_final", clear_on_submit=True):
                     nueva_calif_final = st.number_input(
                         "Nueva Calificación Final (0-100)", 
@@ -1032,7 +1032,7 @@ elif pagina == "Ver Calificaciones y Cálculos":
                         "Modificación por revisión de evidencias"
                     )
 
-                    if st.form_submit_button("💾 Guardar Calificación Final Modificada"):
+                    if st.form_submit_button("Guardar Calificación Final Modificada"):
                         try:
                             cursor.execute("""
                                 INSERT INTO calificacion_final 
@@ -1049,7 +1049,7 @@ elif pagina == "Ver Calificaciones y Cálculos":
                             """, (promedio, nueva_calif_final, justificacion_manual, 
                                   id_alumno, id_grupo, nueva_calif_final, justificacion_manual))
                             conn.commit()
-                            st.success("✅ Calificación final modificada correctamente")
+                            st.success("Calificación final modificada correctamente")
                             time.sleep(2)
                             st.rerun()
                         except Exception as e:
