@@ -3,10 +3,15 @@ import psycopg2
 import pandas as pd
 import time
 from datetime import date
+import psycopg2
+from dotenv import load_dotenv
+import os
+load_dotenv()
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 st.set_page_config(page_title="Sistema Académico", page_icon="📚", layout="wide")
 
-# ===================== CONEXIÓN A SUPABASE (versión recomendada) =====================
+# ===================== CONEXIÓN =====================
 @st.cache_resource
 def get_connection():
     return psycopg2.connect(
@@ -14,12 +19,13 @@ def get_connection():
         port="5432",
         database="postgres",
         user="postgres",
-        password="Aaronyalejandra12",   # ← Asegúrate que esta sea la contraseña correcta de Supabase
-        sslmode="require"
+        password="Aaronyalejandra12",          # ← tu contraseña
+        sslmode="require"                      # ← ESTO ES LO QUE FALTABA
     )
 
 conn = get_connection()
 cursor = conn.cursor()
+
 # ===================== SIDEBAR CON ROLES Y SELECCIÓN DE MAESTRO =====================
 st.sidebar.title("Sistema Académico")
 
