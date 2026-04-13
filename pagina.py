@@ -8,10 +8,10 @@ from datetime import date
 @st.cache_resource
 def get_connection():
     return psycopg2.connect(
-        host="db.ypoqacbyxmyycwrwfekm.supabase.co",
+        host="aws-1-us-west-2.pooler.supabase.com",
         port="6543",                    # ← Cambiado a 6543 (Pooler)
         database="postgres",
-        user="postgres",
+        user="postgres.ypoqacbyxmyycwrwfekm",
         password="Aaronyalejandra12",   # ← tu contraseña
         sslmode="require"
     )
