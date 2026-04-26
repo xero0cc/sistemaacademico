@@ -8,7 +8,7 @@ from datetime import date
 @st.cache_resource
 def get_connection():
     return psycopg2.connect(
-        host="aws-1-us-west-2.pooler.supabase.com",
+        host="",
         port="6543",                    # ← Cambiado a 6543 (Pooler)
         database="postgres",
         user="postgres.ypoqacbyxmyycwrwfekm",
