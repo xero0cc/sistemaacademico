@@ -4,7 +4,6 @@ import pandas as pd
 import time
 from datetime import date
 from streamlit_option_menu import option_menu
-from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode
 
 # ===================== CONEXIÓN A SUPABASE =====================
 @st.cache_resource
