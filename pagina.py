@@ -44,7 +44,7 @@ if st.session_state.usuario is None:
 
     elif opcion == "Alumno":
         matricula = st.text_input("Matrícula")
-        nip = st.text_input("NIP (AAAAMMDD)", type="password")
+        nip = st.text_input("NIP", type="password")
         
         if st.button("Iniciar Sesión como Alumno"):
             cursor.execute("""
