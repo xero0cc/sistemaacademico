@@ -68,7 +68,7 @@ if st.session_state.usuario is None:
 
     elif opcion == "Maestro":
         clave = st.text_input("Clave del maestro")
-        nip = st.text_input("NIP (AAAAMMDD)", type="password")
+        nip = st.text_input("NIP", type="password")
         
         if st.button("Iniciar Sesión como Maestro"):
             cursor.execute("""
