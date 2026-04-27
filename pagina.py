@@ -9,10 +9,10 @@ from streamlit_option_menu import option_menu
 @st.cache_resource
 def get_connection():
     return psycopg2.connect(
-        host="db.ypoqacbyxmyycwrwfekm.supabase.co",
-        port="5432",
+        host="aws-1-us-west-2.pooler.supabase.com",
+        port="6543",
         database="postgres",
-        user="postgres",
+        user="postgres.ypoqacbyxmyycwrwfekm",
         password="Aaronyalejandra12",
         sslmode="require"
     )
