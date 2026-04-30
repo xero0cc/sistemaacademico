@@ -2178,6 +2178,7 @@ elif pagina == "Calificaciones":
 
                             if st.button("Guardar y Bloquear esta Unidad", key=f"guardar_unidad_{id_unidad}"):
                                 try:
+                                    # Guardar calificación y bloquearla
                                     cursor.execute("""
                                         INSERT INTO calificacion_final 
                                         (id_inscripcion, id_unidad, calif_calculada, calif_final, locked, es_modificada)
@@ -2192,8 +2193,16 @@ elif pagina == "Calificaciones":
                                             es_modificada = TRUE,
                                             fecha_modificacion = CURRENT_TIMESTAMP
                                     """, (id_unidad, nueva_calif, nueva_calif, id_alumno, id_grupo, nueva_calif, nueva_calif))
+
+                                    # Cerrar la unidad automáticamente
+                                    cursor.execute("""
+                                        UPDATE unidad 
+                                        SET cerrada = TRUE 
+                                        WHERE id_unidad = %s
+                                    """, (id_unidad,))
+
                                     conn.commit()
-                                    st.success(f"Unidad {numero} guardada y bloqueada")
+                                    st.success(f"Unidad {numero} guardada, bloqueada y cerrada correctamente")
                                     time.sleep(1.0)
                                     st.rerun()
                                 except Exception as e:
