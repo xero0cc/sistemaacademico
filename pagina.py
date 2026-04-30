@@ -2214,6 +2214,7 @@ elif pagina == "Calificaciones":
                     # Botón para guardar todo
                     if st.button("Guardar Todas las Calificaciones y Bloquear", type="primary", use_container_width=True):
                         try:
+                            # 1. Guardar calificaciones por unidad + bloquearlas
                             for id_unidad, calif in zip(unidades_list, calif_unidades):
                                 cursor.execute("""
                                     INSERT INTO calificacion_final 
@@ -2230,7 +2231,7 @@ elif pagina == "Calificaciones":
                                         fecha_modificacion = CURRENT_TIMESTAMP
                                 """, (id_unidad, calif, calif, id_alumno, id_grupo, calif, calif))
 
-                            # Guardar calificación final de la materia
+                            # 2. Guardar calificación final de la materia
                             cursor.execute("""
                                 INSERT INTO calificacion_final 
                                 (id_inscripcion, id_unidad, calif_calculada, calif_final, locked, es_modificada)
@@ -2246,8 +2247,15 @@ elif pagina == "Calificaciones":
                                     fecha_modificacion = CURRENT_TIMESTAMP
                             """, (promedio_final, promedio_final, id_alumno, id_grupo, promedio_final, promedio_final))
 
+                            # 3. Cerrar todas las unidades del grupo automáticamente
+                            cursor.execute("""
+                                UPDATE unidad 
+                                SET cerrada = TRUE 
+                                WHERE id_grupo = %s
+                            """, (id_grupo,))
+
                             conn.commit()
-                            st.success("Todas las calificaciones guardadas y bloqueadas correctamente")
+                            st.success("Todas las calificaciones guardadas, bloqueadas y las unidades han sido cerradas correctamente.")
                             time.sleep(1.5)
                             st.rerun()
                         except Exception as e:
